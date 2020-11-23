@@ -1,0 +1,7 @@
+datetime,test_size,baseline_model,baseline_score,model,score
+2020-11-23 10:40:05.815,0.200000,LinearRegressionModel,221.627816,DecisionTreeRegressionModel,281.025314
+2020-11-23 10:41:21.468,0.200000,LinearRegressionModel,221.627816,RandomForestRegressionModel,212.708205
+2020-11-23 10:42:23.241,0.200000,LinearRegressionModel,221.627816,LinearRegressionModel,210.590207
+2020-11-23 10:43:22.832,0.250000,LinearRegressionModel,206.530166,LinearRegressionModel,195.240622
+2020-11-23 10:45:32.234,0.250000,LinearRegressionModel,206.530166,DecisionTreeRegressionModel,417.494512
+2020-11-23 10:46:26.946,0.250000,LinearRegressionModel,206.530166,RandomForestRegressionModel,207.548765
