@@ -21,7 +21,6 @@ import org.apache.logging.log4j.Logger;
 
 public class AirBnbModel<T> {
 
-    SparkSession spark = null;
     Dataset<Row> airbnbDF =null;
     Dataset<Row> trainDF = null;
     Dataset<Row> testDF = null;
@@ -37,9 +36,7 @@ public class AirBnbModel<T> {
         return model;
     }
 
-    public AirBnbModel(SparkSession spark, T learner, String pathDataset, float testSize){
-        this.spark = spark;
-        this.airbnbDF = spark.read().parquet(pathDataset);
+    public AirBnbModel(T learner, Dataset<Row> airbnbDF, float testSize){
         this.learner = learner;
 
         float trainSize = 1 - testSize;
@@ -197,6 +194,7 @@ public class AirBnbModel<T> {
 
         float testSize = Float.parseFloat(args[1]);
         String pathDataset = args[0];
+
         SparkSession spark = SparkSession
                 .builder()
                 .appName("AirbnbModel")
@@ -204,11 +202,14 @@ public class AirBnbModel<T> {
                 .config("spark.driver.memory", "550M")
                 .getOrCreate();
 
+        Dataset<Row> airbnbDF = spark.read().parquet(pathDataset);
+
+
         RandomForestRegressor learner = new RandomForestRegressor()
                 .setFeaturesCol("features")
                 .setLabelCol("price")
                 .setMaxBins(42);
-        AirBnbModel<RandomForestRegressor> modelPipeline = new AirBnbModel(spark, learner, pathDataset, testSize);
+        AirBnbModel<RandomForestRegressor> modelPipeline = new AirBnbModel(learner, airbnbDF, testSize);
 
         PipelineModel baseLineModel = modelPipeline.buildBaselineModel();
         PipelineModel model = modelPipeline.buildModel();
