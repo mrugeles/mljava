@@ -6,3 +6,4 @@ datetime,test_size,baseline_model,baseline_score,model,score
 2020-11-23 10:45:32.234,0.250000,LinearRegressionModel,206.530166,DecisionTreeRegressionModel,417.494512
 2020-11-23 10:46:26.946,0.250000,LinearRegressionModel,206.530166,RandomForestRegressionModel,207.548765
 2020-11-24 14:20:33.684,0.250000,LinearRegressionModel,206.530166,RandomForestRegressionModel,207.548765
+2020-11-24 17:02:11.136,0.250000,LinearRegressionModel,0.173331,RandomForestRegressionModel,0.165620

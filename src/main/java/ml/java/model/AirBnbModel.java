@@ -136,7 +136,7 @@ public class AirBnbModel<T> {
         RegressionEvaluator regressionEvaluator = new RegressionEvaluator()
                 .setPredictionCol("prediction")
                 .setLabelCol("price")
-                .setMetricName("rmse");
+                .setMetricName("r2");
         return regressionEvaluator.evaluate(predictions);
     }
 
@@ -203,7 +203,15 @@ public class AirBnbModel<T> {
                 .getOrCreate();
 
         Dataset<Row> airbnbDF = spark.read().parquet(pathDataset);
-
+        airbnbDF.createOrReplaceTempView("airbnb");
+        spark.sql(
+                "SELECT neighbourhood_cleansed, " +
+                        "room_type, " +
+                        "bedrooms, " +
+                        "bathrooms, " +
+                        "number_of_reviews, " +
+                        "price " +
+                        "FROM airbnb");
 
         RandomForestRegressor learner = new RandomForestRegressor()
                 .setFeaturesCol("features")
